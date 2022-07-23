@@ -1,24 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
+import { Main } from './mainPage/main';
+import {QalynMalquiz} from './qalynmal/qalynmalquiz';
+import { QalynmalAnswer } from './qalynmal/qalynmalAnswer/qalynmalAnswer';
+import { SumContext } from './Context';
+import { useState } from 'react';
 
 function App() {
+  const [sum, setSum] = useState(0);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+    <SumContext.Provider value={{sum, setSum}}>
+        <Routes>
+
+        <Route
+            path="/"
+            element={<Main/>}
+          />
+
+          <Route
+            path="/quizPage"
+            element={<QalynMalquiz/>}
+          />
+
+          <Route
+            path="/answerPage"
+            element={<QalynmalAnswer/>}
+          />
+
+        </Routes>
+        </SumContext.Provider>
+    </BrowserRouter>
   );
 }
 
